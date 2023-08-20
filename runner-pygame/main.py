@@ -4,12 +4,14 @@ from sys import exit
 from pygame import mouse
 
 pygame.init()
+#initializing pygame 
 
 #display surface
 screen = pygame.display.set_mode((800,400))
 pygame.display.set_caption("Runner")
 clock = pygame.time.Clock()
 FONT = pygame.font.Font(None,50)
+hunged_gravity = 300
 
 desert_surface = pygame.image.load("desert_BG.png").convert()
 hunged_man = pygame.image.load("Hanging Person 1_1.png").convert_alpha()
@@ -29,6 +31,22 @@ while True:
         #cheecking for the collosion of mouse pos with player or hunged rectangel
         if event.type == pygame.MOUSEMOTION:
             if hunged_rect.collidepoint(event.pos):print('collision')
+
+      if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                hunged_gravity = -20
+
+        if event.type == pygame.KEYDOWN:
+            print('keydown')
+
+        if event.type == pygame.KEYUP:
+            print('key up')
+
+        #cheecking for the collosion of mouse pos with player or hunged rectangel
+        if event.type == pygame.MOUSEBUTTONUP:
+            if hunged_rect.collidepoint(event.pos):
+                hunged_gravity = -20
+
 
 
     screen.blit(desert_surface, (0, 0))
